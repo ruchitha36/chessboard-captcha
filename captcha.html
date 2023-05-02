@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Captch Verification</title>
+	<style>
+		div {
+			text-align: center;
+		}
+
+		h1 {
+
+			font-family: 'Courier New', Courier, monospace;
+
+
+		}
+
+		input[type="text"] {
+			font-size: 30px;
+			border: 3px solid black;
+			border-radius: 30px;
+			text-align: center;
+			margin-bottom: 10px;
+
+		}
+
+		button {
+			font-size: large;
+			font-weight: bold;
+
+			margin-bottom: 10px;
+			border-radius: 22px;
+			padding: 15px 80px 15px 80px;
+		}
+
+		#refresh {
+			background-color: aqua;
+		}
+
+		#fs {
+			background-color: brown;
+		}
+
+		#fail {
+			color: red;
+
+		}
+
+		#success {
+			color: green;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Captcha Verification</h1>
+
+		<!-- <form action=""> -->
+		<input type="text" readonly id="cap"> <br>
+        <button id="refresh" onclick="captchRefresh()">Refresh</button> <br>
+        <input type="text"  id="ver"> <br>
+        <button id= "fs" onclick="matchCaptcha()">Submit</button>
+        <p id="fail"></p>
+        <p id="success"></p>
+
+    <!-- </form> --> 
+    </div>
+</body>
+<script>
+
+captchRefresh()
+
+function generateCaptcha(){
+    letters = ["0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" ,"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","@","!","#","$","%","&","*"]
+    
+
+    number = 6
+    mynum = ""
+    for (let i = 0; i < number; i++) {
+        indexNumber = Math.floor(Math.random() * 61)
+        mynum = mynum+letters[indexNumber]
+     
+}
+
+return mynum
+
+}
+function captchRefresh(){
+number = generateCaptcha()
+document.getElementById("cap").value= number
+
+}
+
+function matchCaptcha(){
+    cap = document.getElementById("cap").value;
+    ver = document.getElementById("ver").value;
+    if(cap == ver){
+        console.log("Captcha Success")
+        document.getElementById("success").innerHTML =" Verification Success!"
+        alert("you have successfully verfied you complex capthcah.....")
+        
+        document.getElementById("fail").innerHTML ="" 
+    }
+    else{
+        console.log("Captcha failed")
+        document.getElementById("fail").innerHTML =" Verfication Failed!"
+        document.getElementById("success").innerHTML =""
+        alert("Captha is wornggggggg.")
+    }
+
+captchRefresh()
+document.getElementById("ver").value=""
+}
+</script>
+</html>
